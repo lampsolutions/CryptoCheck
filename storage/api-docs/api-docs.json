@@ -1,0 +1,178 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CryptoCheck API",
+        "description": "CryptoCheck API\n[https://www.cryptopanel.de/].",
+        "termsOfService": "",
+        "contact": {
+            "email": "support@cryptopanel.de"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://cryptocheck.api.cryptopanel.de",
+            "description": "CryptoCheck API Endpoint"
+        }
+    ],
+    "paths": {
+        "/api/v1/registerListener/callback/": {
+            "post": {
+                "tags": [
+                    "Listener"
+                ],
+                "summary": "Adds an listener job to get notified about specific events inside an blockchain via email",
+                "operationId": "Info",
+                "parameters": [
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Address to watch for incoming transactions",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "c",
+                        "in": "query",
+                        "description": "currency",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "BTC",
+                                "BCH",
+                                "LTC",
+                                "DASH"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "confirmations",
+                        "in": "query",
+                        "description": "required confirmations of the transaction to receive transaction detail via http callback",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "Url address to receive transaction details",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/removeListener/callback/": {
+            "post": {
+                "tags": [
+                    "Listener"
+                ],
+                "summary": "Removes an listener job",
+                "operationId": "Info",
+                "parameters": [
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Address to watch for incoming transactions",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "c",
+                        "in": "query",
+                        "description": "currency",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "BTC",
+                                "BCH",
+                                "LTC",
+                                "DASH"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "jobId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "api_key",
+                "in": "query"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Listener",
+            "description": "",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "https://www.cryptopanel.de/"
+            }
+        }
+    ]
+}
